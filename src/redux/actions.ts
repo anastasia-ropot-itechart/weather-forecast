@@ -1,8 +1,15 @@
-import { ADD_CITY, FETCH_WEATHER, HIDE_ALERT, HIDE_LOADER, SHOW_ALERT, SHOW_LOADER } from './types';
+import { ADD_CITY, ADD_MEASUREMENT, FETCH_WEATHER, HIDE_ALERT, HIDE_LOADER, SHOW_ALERT, SHOW_LOADER } from './types';
 
 export function addCity(post: any) {
     return {
         type: ADD_CITY,
+        payload: post,
+    };
+}
+
+export function addMeasurement(post: any) {
+    return {
+        type: ADD_MEASUREMENT,
         payload: post,
     };
 }

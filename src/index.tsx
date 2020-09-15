@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import { App } from './App';
 import * as serviceWorker from './serviceWorker';
 import { rootReducer } from './redux/rootReducer';
+import './styles/main.scss';
 
 declare global {
     interface Window {

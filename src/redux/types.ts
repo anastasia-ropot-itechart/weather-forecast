@@ -1,5 +1,6 @@
 export const ADD_CITY = 'CITY/ADD_CITY';
 export const FETCH_WEATHER = 'WEATHER/FETCH_WEATHER';
+export const ADD_MEASUREMENT = 'WEATHER/ADD_MEASUREMENT';
 export const SHOW_LOADER = 'APP/SHOW_LOADER';
 export const HIDE_LOADER = 'APP/HIDE_LOADER';
 export const SHOW_ALERT = 'APP/SHOW_ALERT';
