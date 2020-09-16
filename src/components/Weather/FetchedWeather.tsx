@@ -2,10 +2,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Loader } from '../Loader';
 import { WeatherContent } from './WeatherContent';
+import { App, Weather } from '../../redux/types';
 
 interface RootState {
-    weather: any;
-    app: any;
+    weather: Weather;
+    app: App;
 }
 
 export const FetchedWeather = () => {

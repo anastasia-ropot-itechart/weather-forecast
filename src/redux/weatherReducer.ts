@@ -1,15 +1,12 @@
-import { ADD_CITY, ADD_MEASUREMENT, FETCH_WEATHER } from './types';
+import { Weather, ADD_MEASUREMENT, FETCH_WEATHER, WeatherActions } from './types';
 
 const initialState = {
-    city: '',
     measurement: 'Kelvin',
-    fetchedWeather: [],
+    fetchedWeather: {},
 };
 
-export const weatherReducer = (state = initialState, action: any) => {
+export const weatherReducer = (state: Weather = initialState, action: WeatherActions) => {
     switch (action.type) {
-        case ADD_CITY:
-            return { ...state, city: action.payload };
         case ADD_MEASUREMENT:
             return { ...state, measurement: action.payload };
         case FETCH_WEATHER:

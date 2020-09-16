@@ -1,11 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Weather } from '../../redux/types';
 
 interface RootState {
-    weather: any;
+    weather: Weather;
 }
 
-export const Temperature = ({ temp }: any) => {
+interface Temperature {
+    temp: number;
+}
+
+export const Temperature = ({ temp }: Temperature) => {
     const measurement = useSelector((state: RootState) => state.weather.measurement);
 
     if (measurement === 'Celsius') {

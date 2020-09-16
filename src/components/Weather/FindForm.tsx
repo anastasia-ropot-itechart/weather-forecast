@@ -1,31 +1,31 @@
-import React, { useState, SyntheticEvent } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { addCity, getWeather, showAlert } from '../../redux/actions';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getWeather, showAlert } from '../../redux/actions';
+import { App } from '../../redux/types';
 import { Alert } from '../Alert';
 
-export const FindForm = (props: any) => {
+export interface DefaultRootState {
+    app: App;
+}
+
+export const FindForm = () => {
+    const [city, setCity] = useState<string>('');
+    const [coordinates, setCoordinates] = useState<string>('');
     const dispatch = useDispatch();
+    const alert = useSelector((state: DefaultRootState) => state.app.alert);
 
-    const [city, setCity] = useState('');
-    const [coordinates, setCoordinates] = useState('');
-
-    const submitHandler = (event: SyntheticEvent) => {
+    const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (!city.trim() && !coordinates.trim()) {
+            return dispatch(showAlert('value mast not be empty'));
+        }
         setCity('');
         setCoordinates('');
     };
 
-    const changeInputCityHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setCity(event.target.value);
-    };
-
-    const changeInputCoordinatesHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setCoordinates(event.target.value);
-    };
-
     return (
         <>
-            {props.alert && <Alert text={props.alert} />}
+            {alert && <Alert text={alert} />}
             <h2>Weather Forecast</h2>
             <h3>Current weather: </h3>
             <form onSubmit={submitHandler} className="find-form">
@@ -39,7 +39,7 @@ export const FindForm = (props: any) => {
                         id="city"
                         value={city}
                         name="city"
-                        onChange={changeInputCityHandler}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setCity(event.target.value)}
                         placeholder="Minsk"
                     />
                 </div>
@@ -57,7 +57,7 @@ export const FindForm = (props: any) => {
                         id="coordinates"
                         value={coordinates}
                         name="coordinates"
-                        onChange={changeInputCoordinatesHandler}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setCoordinates(event.target.value)}
                         placeholder="lat,lon"
                     />
                 </div>
@@ -75,13 +75,4 @@ export const FindForm = (props: any) => {
     );
 };
 
-const mapDispatchToProps = {
-    addCity,
-    showAlert,
-};
-
-const mapStateToProps = (state: any) => ({
-    alert: state.app.alert,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FindForm);
+export default FindForm;

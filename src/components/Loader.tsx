@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const Loader = () => <div className="loader" />;
+export const Loader: React.FC = () => <div className="loader" />;

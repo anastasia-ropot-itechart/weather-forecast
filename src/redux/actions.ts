@@ -1,16 +1,9 @@
-import { ADD_CITY, ADD_MEASUREMENT, FETCH_WEATHER, HIDE_ALERT, HIDE_LOADER, SHOW_ALERT, SHOW_LOADER } from './types';
+import { ADD_MEASUREMENT, FETCH_WEATHER, HIDE_ALERT, HIDE_LOADER, SHOW_ALERT, SHOW_LOADER } from './types';
 
-export function addCity(post: any) {
-    return {
-        type: ADD_CITY,
-        payload: post,
-    };
-}
-
-export function addMeasurement(post: any) {
+export function addMeasurement(data: string) {
     return {
         type: ADD_MEASUREMENT,
-        payload: post,
+        payload: data,
     };
 }
 
@@ -26,7 +19,7 @@ export function hideLoader() {
     };
 }
 
-export function showAlert(text: any) {
+export function showAlert(text: string) {
     return (dispatch: any) => {
         dispatch({
             type: SHOW_ALERT,
@@ -35,7 +28,7 @@ export function showAlert(text: any) {
 
         setTimeout(() => {
             dispatch(hideAlert());
-        }, 3000);
+        }, 5000);
     };
 }
 
