@@ -6,11 +6,11 @@ interface RootState {
     weather: Weather;
 }
 
-interface Temperature {
+interface ITemperature {
     temp: number;
 }
 
-export const Temperature = ({ temp }: Temperature) => {
+export const Temperature: React.FC<{ temp: number }> = ({ temp }: ITemperature) => {
     const measurement = useSelector((state: RootState) => state.weather.measurement);
 
     if (measurement === 'Celsius') {

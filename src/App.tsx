@@ -2,14 +2,16 @@ import React from 'react';
 import FindForm from './components/Weather/FindForm';
 import { FetchedWeather } from './components/Weather/FetchedWeather';
 import { Header } from './components/Header/Header';
+import { SaveCities } from './components/SaveCities/SaveCities';
 
-export const App = () => {
+export const App: React.FC = () => {
     return (
         <>
             <Header />
             <main className="wrapper">
                 <FindForm />
                 <FetchedWeather />
+                <SaveCities />
             </main>
         </>
     );

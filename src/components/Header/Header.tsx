@@ -6,7 +6,7 @@ import { Loader } from '../Loader';
 import { Alert } from '../Alert';
 import { DefaultRootState } from '../Weather/FindForm';
 
-export const Header = () => {
+export const Header: React.FC = () => {
     const [measurement, setMeasurement] = useState<string>('Kelvin');
     const [userWeather, getUserWeather] = useState<any>(null);
     const dispatch = useDispatch();

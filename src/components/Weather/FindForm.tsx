@@ -8,7 +8,7 @@ export interface DefaultRootState {
     app: App;
 }
 
-export const FindForm = () => {
+export const FindForm: React.FC = () => {
     const [city, setCity] = useState<string>('');
     const [coordinates, setCoordinates] = useState<string>('');
     const dispatch = useDispatch();
@@ -42,10 +42,10 @@ export const FindForm = () => {
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setCity(event.target.value)}
                         placeholder="Minsk"
                     />
+                    <button className="button" type="submit" onClick={() => dispatch(getWeather(`q=${city}`))}>
+                        start
+                    </button>
                 </div>
-                <button className="button" type="submit" onClick={() => dispatch(getWeather(`q=${city}`))}>
-                    start
-                </button>
 
                 <div className="find-form__group">
                     <label className="find-form__label" htmlFor="coordinates">
@@ -60,16 +60,16 @@ export const FindForm = () => {
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setCoordinates(event.target.value)}
                         placeholder="lat,lon"
                     />
+                    <button
+                        className="button"
+                        type="submit"
+                        onClick={() =>
+                            dispatch(getWeather(`lat=${coordinates.split(',')[0]}&lon=${coordinates.split(',')[1]}`))
+                        }
+                    >
+                        start
+                    </button>
                 </div>
-                <button
-                    className="button"
-                    type="submit"
-                    onClick={() =>
-                        dispatch(getWeather(`lat=${coordinates.split(',')[0]}&lon=${coordinates.split(',')[1]}`))
-                    }
-                >
-                    start
-                </button>
             </form>
         </>
     );

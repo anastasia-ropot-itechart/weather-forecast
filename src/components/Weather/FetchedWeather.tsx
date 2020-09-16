@@ -9,7 +9,7 @@ interface RootState {
     app: App;
 }
 
-export const FetchedWeather = () => {
+export const FetchedWeather: React.FC = () => {
     const weather = useSelector((state: RootState) => state.weather.fetchedWeather);
     const loading = useSelector((state: RootState) => state.app.loading);
 
