@@ -1,26 +1,29 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
-import { addMeasurement, showAlert } from '../../redux/actions';
+import { addMeasurement, getWeather, showAlert } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { WeatherContent } from '../Weather/WeatherContent';
 import { Loader } from '../Loader';
 import { Alert } from '../Alert';
 import { DefaultRootState } from '../Weather/FindForm';
+import { App, Weather } from '../../redux/types';
+
+interface RootState {
+    weather: Weather;
+    app: App;
+}
 
 export const Header: React.FC = () => {
     const [measurement, setMeasurement] = useState<string>('Kelvin');
-    const [userWeather, getUserWeather] = useState<any>(null);
     const dispatch = useDispatch();
     const alert = useSelector((state: DefaultRootState) => state.app.alert);
+    const weather = useSelector((state: RootState) => state.weather.fetchedWeather);
 
     useEffect(() => {
         async function getUserCity() {
             try {
                 const userData = await fetch('https://ipapi.co/json/').then((data) => data.json());
                 const userCity: string = userData.city;
-                const weather = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?q=${userCity}&appid=dce29b7c45064caf5e8bc28bc3d23bcc`,
-                ).then((data) => data.json());
-                getUserWeather(weather);
+                dispatch(getWeather(`q=${userCity}`));
             } catch (err) {
                 dispatch(showAlert('Failed to fetch the data'));
             }
@@ -41,7 +44,7 @@ export const Header: React.FC = () => {
                 <div className="header__wrapper">
                     <div className="header__logo">WF</div>
                     <div className="header__content">
-                        {userWeather ? <WeatherContent weather={userWeather} /> : <Loader />}
+                        {weather.main ? <WeatherContent weather={weather} /> : <Loader />}
                     </div>
                     <form className="switch-form" onSubmit={submitHandler}>
                         <ul className="switch-form__wrapper">

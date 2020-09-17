@@ -36,7 +36,6 @@ export const SaveCities: React.FC = () => {
 
     return (
         <>
-            <h3>Save City: </h3>
             <form onSubmit={submitHandler} className="find-form">
                 <div className="find-form__group">
                     <label className="find-form__label" htmlFor="coordinates">
@@ -56,18 +55,13 @@ export const SaveCities: React.FC = () => {
                     </button>
                 </div>
             </form>
-            <div className="saved-cities">
-                {cities &&
-                    cities.length &&
+            <ul className="saved-cities">
+                {cities && cities.length ? (
                     cities.map((city) => (
-                        <div key={city}>
-                            <button
-                                className="button saved-cities__button"
-                                name={city}
-                                onClick={() => dispatch(getWeather(`q=${city}`))}
-                            >
+                        <li key={city} className="saved-cities__content">
+                            <div className="saved-cities__title" onClick={() => dispatch(getWeather(`q=${city}`))}>
                                 {city}
-                            </button>
+                            </div>
                             <button
                                 className="button saved-cities__button"
                                 name={city}
@@ -75,9 +69,12 @@ export const SaveCities: React.FC = () => {
                             >
                                 delete
                             </button>
-                        </div>
-                    ))}
-            </div>
+                        </li>
+                    ))
+                ) : (
+                    <li>Save city</li>
+                )}
+            </ul>
         </>
     );
 };

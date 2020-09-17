@@ -1,9 +1,21 @@
 .saved-cities {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
+  width: 50%;
+  list-style-type: none;
+}
+
+.saved-cities__title {
+  cursor: pointer;
+
+  &:hover {
+    color: $button-hover-bg;
+  }
 }
 
 .saved-cities__button {
   margin: 10px;
+}
+
+.saved-cities__content {
+  display: flex;
+  align-items: center;
 }

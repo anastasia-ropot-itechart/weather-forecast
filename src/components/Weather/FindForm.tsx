@@ -26,8 +26,6 @@ export const FindForm: React.FC = () => {
     return (
         <>
             {alert && <Alert text={alert} />}
-            <h2>Weather Forecast</h2>
-            <h3>Current weather: </h3>
             <form onSubmit={submitHandler} className="find-form">
                 <div className="find-form__group">
                     <label className="find-form__label" htmlFor="city">
